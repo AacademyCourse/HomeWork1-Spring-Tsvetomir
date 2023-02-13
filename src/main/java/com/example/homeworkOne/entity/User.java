@@ -5,7 +5,9 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @ToString
 @RequiredArgsConstructor
@@ -26,6 +28,11 @@ public class User {
     private String email;
     @Column (name = "created_at")
     private Instant createdAt;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Address> addressSet = new HashSet<Address>();
+    @OneToMany(mappedBy = "user")
+    private Set<Role> roleSet = new HashSet<Role>();
 
     @Override
     public boolean equals(Object o) {
